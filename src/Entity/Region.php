@@ -2,56 +2,47 @@
 
 namespace App\Entity;
 
-use App\Repository\RegionRepository;
-use Doctrine\ORM\Mapping as ORM;
-
-/**
- * @ORM\Entity(repositoryClass=RegionRepository::class)
- */
 class Region
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
     private $id;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
     private $code;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
+    private $nom;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCode(): ?int
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
-    public function setCode(int $code): self
+    public function setCode(string $code): self
     {
         $this->code = $code;
 
         return $this;
     }
 
-    public function getName(): ?string
+    /**
+     * Get the value of nom
+     */ 
+    public function getNom()
     {
-        return $this->name;
+        return $this->nom;
     }
 
-    public function setName(string $name): self
+    /**
+     * Set the value of nom
+     *
+     * @return  self
+     */ 
+    public function setNom($nom)
     {
-        $this->name = $name;
+        $this->nom = $nom;
 
         return $this;
     }
