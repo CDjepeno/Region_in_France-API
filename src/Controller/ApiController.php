@@ -38,14 +38,14 @@ class ApiController extends AbstractController
      */
     public function listeDeDepartementsParRegion(SerializerInterface $serializer, Request $request): Response
     {
-        // Je récupère la région séléctionner dans le formulaire
+        // Je récupère le code région séléctionner dans le formulaire
         $codeRegion = $request->query->get('region');
 
-        // Je récupère mes régions
+        // Je récupère mes régions que je transforme en objet
         $mesRegions = file_get_contents('https://geo.api.gouv.fr/regions');
         $mesRegions = $serializer->deserialize($mesRegions,'App\Entity\Region[]', 'json');
 
-        // Je récupère la liste des départements
+        // Je récupère la liste des départements sous certaine condition de la validation du formulaire
         if($codeRegion == null || $codeRegion == "Toutes"){
             $mesDeps = file_get_contents('https://geo.api.gouv.fr/departements');
         } else {
