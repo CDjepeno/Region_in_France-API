@@ -12,27 +12,9 @@ use Symfony\Component\HttpFoundation\Request;
 class ApiController extends AbstractController
 {
     /**
-     * Permet de lister les régions
-     * 
-     * @Route("/listeRegions", name="listeRegions")
-     * 
-     * @return Response
-     */
-    public function listeRegion(SerializerInterface $serializer): Response
-    {
-        $mesRegions    = file_get_contents('https://geo.api.gouv.fr/regions');
-        
-        $mesRegionsObj = $serializer->deserialize($mesRegions,'App\Entity\Region[]', 'json');
-
-        return $this->render('api/index.html.twig',[
-            "mesRegions" => $mesRegionsObj
-        ]);
-    }
-
-    /**
      * Permet de récupérer la liste des département par régions
      * 
-     * @Route("/regions/departements", name="list_dep_reg")
+     * @Route("/", name="list_dep_reg")
      *
      * @return Response
      */
@@ -60,4 +42,24 @@ class ApiController extends AbstractController
             "mesDeps"    => $mesDeps
         ]);
     }
+
+    /**
+     * Permet de lister les régions
+     * 
+     * @Route("/listeRegions", name="listeRegions")
+     * 
+     * @return Response
+     */
+    public function listeRegion(SerializerInterface $serializer): Response
+    {
+        $mesRegions    = file_get_contents('https://geo.api.gouv.fr/regions');
+        
+        $mesRegionsObj = $serializer->deserialize($mesRegions,'App\Entity\Region[]', 'json');
+
+        return $this->render('api/index.html.twig',[
+            "mesRegions" => $mesRegionsObj
+        ]);
+    }
+    
+
 }
